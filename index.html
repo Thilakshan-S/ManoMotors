@@ -1,0 +1,1277 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="Icon" href="assets/Mano Motors logo.png">
+    <title>Mano Motors | Auto Spare Parts</title>
+    <!-- Cache Control - Prevent old version from being stuck in browser -->
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- AOS Library (Animate on Scroll) -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            blue: '#0067B5',
+                            slate: '#95AFBA',
+                            sage: '#BDC4A7',
+                            lime: '#D5E1A3',
+                            light: '#FCFFF4',
+                            dark: '#111111'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #FCFFF4;
+        }
+
+        .dark ::-webkit-scrollbar-track {
+            background: #111111;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #95AFBA;
+            border-radius: 5px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #0067B5;
+        }
+    </style>
+</head>
+
+<body class="bg-brand-light dark:bg-brand-dark text-gray-800 dark:text-gray-200 transition-colors duration-300">
+
+    <!-- Navigation Bar -->
+    <nav class="sticky top-0 w-full z-50 transition-all duration-300 bg-brand-blue shadow-none" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Logo -->
+                <div class="flex-shrink-0 flex items-center gap-2">
+                    <div class="text-brand-blue p-2 ">
+                        <img src="assets/Mano Motors logo.png" alt="Mano Motors Logo" class="w-20 h-20">
+                    </div>
+                    <a href="#"
+                        class="font-bold text-2xl tracking-tight text-brand-light hover:text-brand-lime transition-colors">
+                        Mano Motors
+                    </a>
+                </div>
+
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#home"
+                        class="font-medium text-brand-light hover:text-brand-lime transition-colors">Home</a>
+                    <a href="#about" class="font-medium text-brand-light hover:text-brand-lime transition-colors">About
+                        Us</a>
+                    <a href="gallery.html"
+                        class="font-medium text-brand-light hover:text-brand-lime transition-colors">Gallery</a>
+                    <a href="#products"
+                        class="font-medium text-brand-light hover:text-brand-lime transition-colors">Products</a>
+                    <a href="#services"
+                        class="font-medium text-brand-light hover:text-brand-lime transition-colors">Services</a>
+                    <a href="contact.html"
+                        class="font-medium text-brand-light hover:text-brand-lime transition-colors">Contact</a>
+
+                    <!-- Dark Mode Toggle Button -->
+                    <button id="theme-toggle"
+                        class="p-2 rounded-full hover:bg-brand-light/20 transition-all duration-500 text-brand-light hover:text-brand-lime focus:outline-none transform"
+                        aria-label="Toggle dark mode">
+                        <i data-lucide="moon" id="theme-toggle-dark-icon" class="w-5 h-5 hidden"></i>
+                        <i data-lucide="sun" id="theme-toggle-light-icon" class="w-5 h-5 hidden"></i>
+                    </button>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden flex items-center gap-4">
+                    <button id="theme-toggle-mobile"
+                        class="p-2 rounded-full hover:bg-brand-light/20 transition-all duration-500 text-brand-light focus:outline-none transform">
+                        <i data-lucide="moon" id="theme-toggle-dark-icon-mobile" class="w-5 h-5 hidden"></i>
+                        <i data-lucide="sun" id="theme-toggle-light-icon-mobile" class="w-5 h-5 hidden"></i>
+                    </button>
+                    <button id="mobile-menu-button"
+                        class="text-brand-light hover:text-brand-lime focus:outline-none p-2 transition-transform duration-300 transform active:scale-90"
+                        aria-label="Open mobile menu">
+                        <i data-lucide="menu" class="w-6 h-6" id="menu-icon"></i>
+                        <i data-lucide="x" class="w-6 h-6 hidden" id="close-icon"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Overlay -->
+        <div id="mobile-menu"
+            class="md:hidden absolute w-full shadow-lg bg-brand-blue border-brand-light/20 overflow-hidden transition-all duration-300 ease-in-out opacity-0 max-h-0 border-t-0 pointer-events-none">
+            <div class="px-4 py-4 space-y-2 flex flex-col">
+                <a href="#home"
+                    class="mobile-link block px-4 py-3 rounded-md text-base font-medium text-brand-light hover:bg-brand-light/10 hover:text-brand-lime transition-all hover:pl-6">Home</a>
+                <a href="gallery.html"
+                    class="mobile-link block px-4 py-3 rounded-md text-base font-medium text-brand-light hover:bg-brand-light/10 hover:text-brand-lime transition-all hover:pl-6">Gallery</a>
+                <a href="#products"
+                    class="mobile-link block px-4 py-3 rounded-md text-base font-medium text-brand-light hover:bg-brand-light/10 hover:text-brand-lime transition-all hover:pl-6">Products</a>
+                <a href="#services"
+                    class="mobile-link block px-4 py-3 rounded-md text-base font-medium text-brand-light hover:bg-brand-light/10 hover:text-brand-lime transition-all hover:pl-6">Services</a>
+                <a href="#about"
+                    class="mobile-link block px-4 py-3 rounded-md text-base font-medium text-brand-light hover:bg-brand-light/10 hover:text-brand-lime transition-all hover:pl-6">About
+                    Us</a>
+                <a href="#contact"
+                    class="mobile-link block px-4 py-3 rounded-md text-base font-medium text-brand-light hover:bg-brand-light/10 hover:text-brand-lime transition-all hover:pl-6">Contact</a>
+            </div>
+        </div>
+    </nav>
+    <!-- Hero Section -->
+    <style>
+        /* Floating orb animation */
+        @keyframes float-slow {
+
+            0%,
+            100% {
+                transform: translateY(0px) scale(1);
+            }
+
+            50% {
+                transform: translateY(-30px) scale(1.05);
+            }
+        }
+
+        @keyframes float-reverse {
+
+            0%,
+            100% {
+                transform: translateY(0px) scale(1);
+            }
+
+            50% {
+                transform: translateY(25px) scale(0.95);
+            }
+        }
+
+        @keyframes shimmer-line {
+            0% {
+                transform: translateX(-100%);
+            }
+
+            100% {
+                transform: translateX(200%);
+            }
+        }
+
+        @keyframes particle-rise {
+            0% {
+                opacity: 0;
+                transform: translateY(0) scale(0.5);
+            }
+
+            50% {
+                opacity: 1;
+            }
+
+            100% {
+                opacity: 0;
+                transform: translateY(-120px) scale(1.2);
+            }
+        }
+
+        .orb-1 {
+            animation: float-slow 7s ease-in-out infinite;
+        }
+
+        .orb-2 {
+            animation: float-reverse 9s ease-in-out infinite;
+        }
+
+        .orb-3 {
+            animation: float-slow 11s ease-in-out infinite 1.5s;
+        }
+
+        .hero-img-float {
+            animation: float-slow 8s ease-in-out infinite;
+        }
+
+        .shimmer-bar::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.6), transparent);
+            animation: shimmer-line 2.5s ease-in-out infinite;
+        }
+
+        .particle {
+            animation: particle-rise 4s ease-out infinite;
+        }
+
+        .particle:nth-child(2) {
+            animation-delay: 0.8s;
+        }
+
+        .particle:nth-child(3) {
+            animation-delay: 1.6s;
+        }
+
+        .particle:nth-child(4) {
+            animation-delay: 2.4s;
+        }
+    </style>
+
+    <header id="home"
+        class="relative overflow-hidden bg-brand-light dark:bg-[#07090e] flex items-center min-h-screen transition-colors duration-700">
+
+        <!-- Animated background grid lines (dark mode only) -->
+        <div class="absolute inset-0 z-0 hidden dark:block opacity-[0.04] pointer-events-none">
+            <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <pattern id="grid" width="80" height="80" patternUnits="userSpaceOnUse">
+                        <path d="M 80 0 L 0 0 0 80" fill="none" stroke="white" stroke-width="1" />
+                    </pattern>
+                </defs>
+                <rect width="100%" height="100%" fill="url(#grid)" />
+            </svg>
+        </div>
+
+        <!-- Premium Gradient Overlays -->
+        <div
+            class="absolute inset-0 z-0 bg-gradient-to-r from-brand-light via-brand-light/95 to-transparent dark:from-[#07090e] dark:via-[#07090e]/90 dark:to-transparent transition-colors duration-700 pointer-events-none">
+        </div>
+        <div
+            class="absolute inset-0 z-0 bg-gradient-to-t from-brand-light/60 dark:from-[#07090e]/60 to-transparent transition-colors duration-700 pointer-events-none">
+        </div>
+
+        <!-- Floating Ambient Orbs -->
+        <div class="absolute -top-32 -left-32 w-[500px] h-[500px] orb-1 pointer-events-none z-0">
+            <div class="w-full h-full rounded-full bg-brand-blue/10 dark:bg-brand-blue/20 blur-[80px]"></div>
+        </div>
+        <div class="absolute top-1/2 -left-20 w-[300px] h-[300px] orb-2 pointer-events-none z-0">
+            <div class="w-full h-full rounded-full bg-brand-lime/20 dark:bg-brand-lime/10 blur-[60px]"></div>
+        </div>
+        <div class="absolute bottom-10 left-1/4 w-[200px] h-[200px] orb-3 pointer-events-none z-0">
+            <div class="w-full h-full rounded-full bg-brand-sage/15 dark:bg-brand-sage/5 blur-[50px]"></div>
+        </div>
+
+        <!-- Floating Particles (dark mode sparkle effect) -->
+        <div class="absolute bottom-20 left-32 hidden dark:flex flex-col gap-1 pointer-events-none z-0">
+            <div class="particle w-1.5 h-1.5 rounded-full bg-brand-lime/80"></div>
+            <div class="particle w-1 h-1 rounded-full bg-white/60 ml-4"></div>
+            <div class="particle w-2 h-2 rounded-full bg-brand-blue/60 ml-2"></div>
+            <div class="particle w-1 h-1 rounded-full bg-brand-lime/50 ml-6"></div>
+        </div>
+
+        <!-- The User-Provided Hero Image (right side, floating) -->
+        <div
+            class="absolute inset-0 left-0 lg:left-[25%] z-0 flex items-center justify-end overflow-hidden pointer-events-none">
+            <!-- Seamless left-edge fade masks -->
+            <div
+                class="absolute inset-y-0 left-0 w-2/3 bg-gradient-to-r from-brand-light via-brand-light/70 to-transparent dark:from-[#07090e] dark:via-[#07090e]/70 dark:to-transparent z-10 hidden lg:block transition-colors duration-700">
+            </div>
+            <div
+                class="absolute bottom-0 inset-x-0 h-2/3 bg-gradient-to-t from-brand-light dark:from-[#07090e] to-transparent z-10 lg:hidden transition-colors duration-700">
+            </div>
+
+            <!-- Glowing backdrop behind image (dark only) -->
+            <div
+                class="absolute right-0 top-1/2 -translate-y-1/2 w-[60%] aspect-square rounded-full bg-brand-blue/10 dark:bg-brand-blue/15 blur-[100px] pointer-events-none z-0 orb-1">
+            </div>
+
+            <img src="assets/Mano Motors Hero.png" alt="Mano Motors Hero Vehicle"
+                class="hero-img-float relative z-[1] w-full h-full opacity-25 dark:opacity-70 object-cover object-center lg:object-left mix-blend-multiply dark:mix-blend-lighten filter dark:brightness-95 dark:contrast-110 pointer-events-none transition-all duration-700">
+        </div>
+
+        <!-- Main Content -->
+        <div class="relative z-10 max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 w-full pt-24 pb-16 lg:py-0">
+            <div class="w-full lg:w-[55%]">
+
+                <!-- Micro-badge -->
+                <div class="flex items-center gap-3 mb-6" data-aos="fade-down" data-aos-duration="1000">
+                    <div
+                        class="flex items-center gap-2 px-4 py-2 rounded-full border border-brand-blue/30 dark:border-brand-lime/30 bg-brand-blue/5 dark:bg-brand-lime/5 backdrop-blur-sm">
+                        <span class="w-2 h-2 rounded-full bg-brand-blue dark:bg-brand-lime animate-pulse"></span>
+                        <span
+                            class="text-xs font-bold tracking-[0.2em] uppercase text-brand-blue dark:text-brand-lime">Genuine
+                            Auto Spare Parts</span>
+                    </div>
+                </div>
+
+                <!-- Main Heading with shimmer accent line -->
+                <div data-aos="fade-up" data-aos-duration="1200" data-aos-delay="100">
+                    <h1
+                        class="text-6xl md:text-7xl lg:text-[8rem] font-black text-brand-dark dark:text-white uppercase leading-[0.9] tracking-tighter mb-4 transition-colors duration-700">
+                        MANO<br>
+                        <span class="text-brand-blue dark:text-brand-lime">MOTORS</span><br>
+                        SPARES
+                    </h1>
+                    <!-- Premium shimmer underline -->
+                    <div
+                        class="relative h-1 w-48 rounded-full bg-gradient-to-r from-brand-blue to-brand-lime overflow-hidden mt-5 mb-8 shimmer-bar">
+                    </div>
+                </div>
+
+                <!-- Tagline -->
+                <p class="text-brand-slate dark:text-gray-300 text-xl md:text-2xl font-light tracking-wide mb-10 leading-relaxed transition-colors duration-700 max-w-md"
+                    data-aos="fade-up" data-aos-delay="300" data-aos-duration="1200">
+                    Quality spare parts for your 3-wheeler — trusted by thousands of riders.
+                </p>
+
+                <!-- CTA Buttons -->
+                <div class="flex flex-col sm:flex-row gap-4" data-aos="fade-up" data-aos-delay="500"
+                    data-aos-duration="1200">
+                    <a href="#products"
+                        class="group relative overflow-hidden bg-brand-lime hover:bg-[#c2d08a] text-brand-dark px-10 py-5 rounded-xl font-bold text-lg transition-all shadow-xl shadow-brand-lime/20 dark:shadow-brand-lime/10 hover:shadow-brand-lime/50 transform hover:-translate-y-1.5 flex items-center justify-center gap-2 uppercase tracking-widest">
+                        <span class="relative z-10 flex items-center gap-2">
+                            Shop Now
+                            <i data-lucide="arrow-right"
+                                class="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300"></i>
+                        </span>
+                    </a>
+                    <a href="#contact"
+                        class="bg-transparent border-2 border-brand-dark/40 dark:border-white/30 text-brand-dark dark:text-white hover:bg-brand-dark hover:border-brand-dark hover:text-white dark:hover:bg-white dark:hover:border-white dark:hover:text-black px-10 py-5 rounded-xl font-bold text-lg transition-all transform hover:-translate-y-1.5 flex items-center justify-center gap-2 uppercase tracking-widest backdrop-blur-sm">
+                        Contact Us
+                    </a>
+                </div>
+
+                <!-- Trust signals -->
+                <div class="flex items-center gap-6 mt-12" data-aos="fade-up" data-aos-delay="700"
+                    data-aos-duration="1200">
+                    <div class="flex -space-x-2">
+                        <div
+                            class="w-8 h-8 rounded-full bg-brand-blue flex items-center justify-center text-white text-xs font-bold border-2 border-brand-light dark:border-[#07090e]">
+                            M</div>
+                        <div
+                            class="w-8 h-8 rounded-full bg-brand-slate flex items-center justify-center text-white text-xs font-bold border-2 border-brand-light dark:border-[#07090e]">
+                            K</div>
+                        <div
+                            class="w-8 h-8 rounded-full bg-brand-lime flex items-center justify-center text-brand-dark text-xs font-bold border-2 border-brand-light dark:border-[#07090e]">
+                            S</div>
+                    </div>
+                    <p class="text-sm text-brand-slate dark:text-gray-400 font-medium">
+                        <span class="text-brand-dark dark:text-white font-bold">2,000+</span> happy customers
+                    </p>
+                    <div class="flex items-center gap-1">
+                        <i data-lucide="star" class="w-4 h-4 text-yellow-400 fill-yellow-400"></i>
+                        <span class="text-sm font-bold text-brand-dark dark:text-white">4.9</span>
+                        <span class="text-sm text-brand-slate dark:text-gray-400">rating</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- About Us Section -->
+    <section id="about" class="py-24 bg-white dark:bg-[#151515] transition-colors duration-500 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                <!-- Image Collage -->
+                <div class="relative" data-aos="fade-right" data-aos-duration="1200">
+                    <div class="flex gap-4 items-center">
+                        <!-- Primary Image -->
+                        <div class="w-7/12 mt-10">
+                            <img src="assets/shop01.webp" alt="Auto Spare Parts Shop"
+                                class="rounded-3xl w-full h-[450px] object-cover shadow-2xl transform hover:-translate-y-2 transition-transform duration-500 border-4 border-white dark:border-[#222]">
+                        </div>
+                        <!-- Secondary Image -->
+                        <div class="w-5/12 mb-10">
+                            <img src="assets/shop02.webp" alt="Professional Mechanic"
+                                class="rounded-2xl w-full h-[350px] object-cover shadow-xl transform hover:scale-105 translate-y-6 transition-transform duration-500 border-4 border-brand-light/50 dark:border-[#333]">
+                        </div>
+                    </div>
+                    <!-- Decorative Backdrop -->
+                    <div
+                        class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 -z-10 w-[120%] h-[120%] bg-brand-blue/5 dark:bg-brand-lime/5 rounded-full blur-3xl pointer-events-none">
+                    </div>
+                </div>
+
+                <!-- Text Content -->
+                <div data-aos="fade-left" data-aos-duration="1200" data-aos-delay="200">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-12 h-1 rounded-full bg-brand-blue dark:bg-brand-lime"></div>
+                        <span
+                            class="text-brand-blue dark:text-brand-lime font-bold uppercase tracking-wider text-sm drop-shadow-sm">About
+                            Us</span>
+                    </div>
+                    <h2 class="text-4xl md:text-5xl font-extrabold text-brand-dark dark:text-white mb-6 leading-tight">
+                        Your Trusted Partner in <span
+                            class="bg-clip-text text-transparent bg-gradient-to-r from-brand-blue to-brand-slate dark:from-brand-lime dark:to-brand-sage">3-Wheeler
+                            Spares</span>
+                    </h2>
+                    <p class="text-lg text-brand-slate dark:text-gray-300 mb-6 leading-relaxed font-light">
+                        With over a decade of hands-on experience in the automotive industry, <strong
+                            class="text-brand-dark dark:text-white font-semibold">Mano Motors</strong> has established
+                        itself as the leading provider of premium 3-wheeler spare parts. We deeply understand the unique
+                        mechanical demands of auto rickshaws and daily drivers.
+                    </p>
+                    <p class="text-lg text-brand-slate dark:text-gray-300 mb-10 leading-relaxed font-light">
+                        Customers choose us for our unwavering commitment to quality and longevity. Every part on our
+                        shelves is rigorously verified for authenticity and durability. From essential engine components
+                        to structural accessories, our expert staff is here to ensure your vehicle stays reliable on
+                        every journey.
+                    </p>
+
+                    <div class="grid grid-cols-2 gap-6">
+                        <!-- Stat 1 -->
+                        <div
+                            class="flex items-center gap-4 p-4 rounded-2xl bg-brand-light dark:bg-[#202020] border border-brand-slate/20 dark:border-white/5 transition-colors duration-500">
+                            <div
+                                class="w-12 h-12 shrink-0 rounded-full bg-brand-blue/10 dark:bg-brand-lime/10 flex items-center justify-center">
+                                <i data-lucide="award" class="w-6 h-6 text-brand-blue dark:text-brand-lime"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-brand-dark dark:text-white text-xl">02+ Years</h4>
+                                <p
+                                    class="text-xs font-semibold uppercase tracking-wider text-brand-slate dark:text-gray-400">
+                                    Experience</p>
+                            </div>
+                        </div>
+                        <!-- Stat 2 -->
+                        <div
+                            class="flex items-center gap-4 p-4 rounded-2xl bg-brand-light dark:bg-[#202020] border border-brand-slate/20 dark:border-white/5 transition-colors duration-500">
+                            <div
+                                class="w-12 h-12 shrink-0 rounded-full bg-brand-blue/10 dark:bg-brand-lime/10 flex items-center justify-center">
+                                <i data-lucide="users" class="w-6 h-6 text-brand-blue dark:text-brand-lime"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-brand-dark dark:text-white text-xl">2000+</h4>
+                                <p
+                                    class="text-xs font-semibold uppercase tracking-wider text-brand-slate dark:text-gray-400">
+                                    Happy Clients</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Why Choose Us Section -->
+    <section id="why-us" class="relative py-24 bg-[#0a0e1a] overflow-hidden">
+        <!-- Dot grid background -->
+        <div class="absolute inset-0 opacity-[0.07]"
+            style="background-image:radial-gradient(circle,#0067B5 1px,transparent 1px);background-size:32px 32px;">
+        </div>
+        <!-- Ambient glows -->
+        <div
+            class="absolute top-0 left-1/2 -translate-x-1 w-[800px] h-[350px] bg-brand-blue/15 blur-[140px] rounded-full pointer-events-none">
+        </div>
+        <div
+            class="absolute bottom-0 right-1/2 w-[500px] h-[250px] bg-brand-lime/8 blur-[120px] rounded-full pointer-events-none">
+        </div>
+
+        <div class="relative max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
+
+            <!-- Section Header -->
+            <div class="text-center mb-12" data-aos="fade-up" data-aos-duration="1000">
+                <div
+                    class="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-brand-blue/40 bg-brand-blue/10 mb-5">
+                    <span class="w-2 h-2 rounded-full bg-brand-lime animate-pulse"></span>
+                    <span class="text-xs font-bold tracking-[0.2em] uppercase text-brand-lime">Why Us</span>
+                </div>
+                <h2 class="text-4xl md:text-5xl font-extrabold text-white mb-4 leading-tight">
+                    Why Choose <span
+                        class="bg-clip-text text-transparent bg-gradient-to-r from-brand-blue to-brand-lime">Mano
+                        Motors?</span>
+                </h2>
+                <p class="text-lg text-gray-400 max-w-2xl mx-auto font-light">
+                    We're more than just a parts shop — your trusted partner for every 3-wheeler need.
+                </p>
+            </div>
+
+            <!-- DESKTOP INFOGRAPHIC -->
+            <div class="hidden lg:flex justify-center">
+                <div class="relative" style="width:900px;height:620px;">
+
+                    <!-- SVG Arrow Lines -->
+                    <svg class="absolute inset-0 w-full h-full pointer-events-none" viewBox="0 0 900 620"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <marker id="arr-b" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+                                <path d="M0,0 L0,6 L8,3 z" fill="#0067B5" />
+                            </marker>
+                            <marker id="arr-s" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+                                <path d="M0,0 L0,6 L8,3 z" fill="#BDC4A7" />
+                            </marker>
+                        </defs>
+                        <!-- Left badges → center (450,310) -->
+                        <line x1="178" y1="90" x2="400" y2="285" stroke="#0067B5" stroke-width="1.5"
+                            stroke-dasharray="6,4" marker-end="url(#arr-b)" opacity="0.65" />
+                        <line x1="178" y1="220" x2="400" y2="305" stroke="#0067B5" stroke-width="1.5"
+                            stroke-dasharray="6,4" marker-end="url(#arr-b)" opacity="0.65" />
+                        <line x1="178" y1="360" x2="400" y2="325" stroke="#0067B5" stroke-width="1.5"
+                            stroke-dasharray="6,4" marker-end="url(#arr-b)" opacity="0.65" />
+                        <line x1="178" y1="500" x2="400" y2="345" stroke="#0067B5" stroke-width="1.5"
+                            stroke-dasharray="6,4" marker-end="url(#arr-b)" opacity="0.65" />
+                        <!-- Right badges → center -->
+                        <line x1="722" y1="90" x2="500" y2="285" stroke="#BDC4A7" stroke-width="1.5"
+                            stroke-dasharray="6,4" marker-end="url(#arr-s)" opacity="0.65" />
+                        <line x1="722" y1="220" x2="500" y2="305" stroke="#BDC4A7" stroke-width="1.5"
+                            stroke-dasharray="6,4" marker-end="url(#arr-s)" opacity="0.65" />
+                        <line x1="722" y1="360" x2="500" y2="325" stroke="#BDC4A7" stroke-width="1.5"
+                            stroke-dasharray="6,4" marker-end="url(#arr-s)" opacity="0.65" />
+                        <line x1="722" y1="500" x2="500" y2="345" stroke="#BDC4A7" stroke-width="1.5"
+                            stroke-dasharray="6,4" marker-end="url(#arr-s)" opacity="0.65" />
+                    </svg>
+
+                    <!-- Center Image -->
+                    <div class="absolute" style="left:280px;top:155px;width:340px;height:310px;" data-aos="zoom-in"
+                        data-aos-duration="1000">
+                        <div class="absolute inset-0 bg-brand-blue/15 rounded-full blur-3xl"></div>
+                        <div class="absolute w-80 h-80 rounded-full border border-brand-blue/20 left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 animate-ping"
+                            style="animation-duration:4s;"></div>
+                        <div
+                            class="absolute w-60 h-60 rounded-full border border-brand-lime/15 left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
+                        </div>
+                        <img src="assets/why choose image 03.png" alt="Why Choose Mano Motors"
+                            class="relative z-10 w-72 h-72 object-cover"
+                            style="filter:drop-shadow(0 0 50px rgba(0,103,181,0.5));">
+                    </div>
+
+                    <!-- LEFT BADGES (brand-blue) -->
+                    <div class="absolute group" style="left:-140px;top:58px;" data-aos="fade-right" data-aos-delay="0">
+                        <div
+                            class="flex items-center rounded-2xl bg-transparent  hover:border-brand-blue/60 hover:bg-brand-blue/10 transition-all duration-300 shadow-xl cursor-default w-72">
+                            <div
+                                class="shrink-0 w-10 h-10 rounded-xl bg-brand-blue/20 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                                <i data-lucide="truck" class="w-5 h-5 text-brand-blue"></i>
+                            </div>
+                            <div>
+                                <p class="font-bold text-white text-2xl">Fast Delivery</p>
+                                <p class="text-[15px] text-gray-500">Island-wide</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="absolute group" style="left:-180px;top:188px;" data-aos="fade-right"
+                        data-aos-delay="80">
+                        <div
+                            class="flex items-center rounded-2xl bg-transparent  hover:border-brand-blue/60 hover:bg-brand-blue/10 transition-all duration-300 shadow-xl cursor-default w-72">
+                            <div
+                                class="shrink-0 w-10 h-10 rounded-xl bg-brand-blue/20 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                                <i data-lucide="shield-check" class="w-5 h-5 text-brand-blue"></i>
+                            </div>
+                            <div>
+                                <p class="font-bold text-white text-2xl">Genuine Parts</p>
+                                <p class="text-[15px] text-gray-500">100% authentic</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="absolute group" style="left:-170px;top:328px;" data-aos="fade-right"
+                        data-aos-delay="160">
+                        <div
+                            class="flex items-center rounded-2xl bg-transparent hover:border-brand-blue/60 hover:bg-brand-blue/10 transition-all duration-300 shadow-xl cursor-default w-72">
+                            <div
+                                class="shrink-0 w-10 h-10 rounded-xl bg-brand-blue/20 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                                <i data-lucide="users" class="w-5 h-5 text-brand-blue"></i>
+                            </div>
+                            <div>
+                                <p class="font-bold text-white text-2xl">Expert Team</p>
+                                <p class="text-[15px] text-gray-500">10+ yrs exp.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="absolute group" style="left:-120px;top:468px;" data-aos="fade-right"
+                        data-aos-delay="240">
+                        <div
+                            class="flex items-center rounded-2xl bg-transparent hover:border-brand-blue/60 hover:bg-brand-blue/10 transition-all duration-300 shadow-xl cursor-default w-72">
+                            <div
+                                class="shrink-0 w-10 h-10 rounded-xl bg-brand-blue/20 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                                <i data-lucide="layers" class="w-5 h-5 text-brand-blue"></i>
+                            </div>
+                            <div>
+                                <p class="font-bold text-white text-2xl">Wide Selection</p>
+                                <p class="text-[15px] text-gray-500">All brands</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- RIGHT BADGES (brand-sage) -->
+                    <div class="absolute group" style="right:-180px;top:58px;" data-aos="fade-left" data-aos-delay="0">
+                        <div
+                            class="flex items-center rounded-2xl bg-transparent hover:border-brand-sage/60 hover:bg-brand-sage/5 transition-all duration-300 shadow-xl cursor-default w-72">
+                            <div
+                                class="shrink-0 w-10 h-10 rounded-xl bg-brand-sage/20 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                                <i data-lucide="tag" class="w-5 h-5 text-brand-sage"></i>
+                            </div>
+                            <div>
+                                <p class="font-bold text-white text-2xl">Best Prices</p>
+                                <p class="text-[15px] text-gray-500">Unbeatable value</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="absolute group" style="right:-190px;top:188px;" data-aos="fade-left"
+                        data-aos-delay="80">
+                        <div
+                            class="flex items-center rounded-2xl bg-transparent hover:border-brand-sage/60 hover:bg-brand-sage/5 transition-all duration-300 shadow-xl cursor-default w-72">
+                            <div
+                                class="shrink-0 w-10 h-10 rounded-xl bg-brand-sage/20 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                                <i data-lucide="headphones" class="w-5 h-5 text-brand-sage"></i>
+                            </div>
+                            <div>
+                                <p class="font-bold text-white text-2xl">24/7 Support</p>
+                                <p class="text-[15px] text-gray-500">WhatsApp ready</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="absolute group" style="right:-200px;top:328px;" data-aos="fade-left"
+                        data-aos-delay="160">
+                        <div
+                            class="flex items-center rounded-2xl bg-transparent hover:border-brand-sage/60 hover:bg-brand-sage/5 transition-all duration-300 shadow-xl cursor-default w-72">
+                            <div
+                                class="shrink-0 w-10 h-10 rounded-xl bg-brand-sage/20 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                                <i data-lucide="refresh-ccw" class="w-5 h-5 text-brand-sage"></i>
+                            </div>
+                            <div>
+                                <p class="font-bold text-white text-2xl">Easy Returns</p>
+                                <p class="text-[15px] text-gray-500">Hassle-free</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="absolute group" style="right:-150px;top:468px;" data-aos="fade-left"
+                        data-aos-delay="240">
+                        <div
+                            class="flex items-center rounded-2xl bg-transparent hover:border-brand-sage/60 hover:bg-brand-sage/5 transition-all duration-300 shadow-xl cursor-default w-72">
+                            <div
+                                class="shrink-0 w-10 h-10 rounded-xl bg-brand-sage/20 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                                <i data-lucide="award" class="w-5 h-5 text-brand-sage"></i>
+                            </div>
+                            <div>
+                                <p class="font-bold text-white text-2xl">Trusted Brand</p>
+                                <p class="text-[15px] text-gray-500">1000s happy</p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- MOBILE / TABLET -->
+            <div class="lg:hidden">
+                <div class="flex justify-center mb-10" data-aos="zoom-in">
+                    <div class="relative w-52 h-52">
+                        <div class="absolute inset-0 bg-brand-blue/20 rounded-full blur-3xl"></div>
+                        <img src="assets/why choose image 03.png" alt="Why Choose Mano Motors"
+                            class="relative w-48 h-48 object-cover"
+                            style="filter:drop-shadow(0 0 28px rgba(0,103,181,0.5));">
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div class="flex items-center gap-3 p-4 rounded-2xl bg-white/5 border border-brand-blue/20 hover:border-brand-blue/50 transition-all"
+                        data-aos="fade-up" data-aos-delay="0">
+                        <div class="w-10 h-10 shrink-0 rounded-xl bg-brand-blue/20 flex items-center justify-center"><i
+                                data-lucide="truck" class="w-5 h-5 text-brand-blue"></i></div>
+                        <div>
+                            <p class="font-bold text-white text-2xl">Fast Delivery</p>
+                            <p class="text-sm text-gray-500">Island-wide dispatch</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-3 p-4 rounded-2xl bg-white/5 border border-brand-sage/20 hover:border-brand-sage/50 transition-all"
+                        data-aos="fade-up" data-aos-delay="50">
+                        <div class="w-10 h-10 shrink-0 rounded-xl bg-brand-sage/20 flex items-center justify-center"><i
+                                data-lucide="tag" class="w-5 h-5 text-brand-sage"></i></div>
+                        <div>
+                            <p class="font-bold text-white text-2xl">Best Prices</p>
+                            <p class="text-sm text-gray-500">Unbeatable value</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-3 p-4 rounded-2xl bg-white/5 border border-brand-blue/20 hover:border-brand-blue/50 transition-all"
+                        data-aos="fade-up" data-aos-delay="100">
+                        <div class="w-10 h-10 shrink-0 rounded-xl bg-brand-blue/20 flex items-center justify-center"><i
+                                data-lucide="shield-check" class="w-5 h-5 text-brand-blue"></i></div>
+                        <div>
+                            <p class="font-bold text-white text-2xl">Genuine Parts</p>
+                            <p class="text-sm text-gray-500">100% authentic</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-3 p-4 rounded-2xl bg-white/5 border border-brand-sage/20 hover:border-brand-sage/50 transition-all"
+                        data-aos="fade-up" data-aos-delay="150">
+                        <div class="w-10 h-10 shrink-0 rounded-xl bg-brand-sage/20 flex items-center justify-center"><i
+                                data-lucide="headphones" class="w-5 h-5 text-brand-sage"></i></div>
+                        <div>
+                            <p class="font-bold text-white text-2xl">24/7 Support</p>
+                            <p class="text-sm text-gray-500">WhatsApp ready</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-3 p-4 rounded-2xl bg-white/5 border border-brand-blue/20 hover:border-brand-blue/50 transition-all"
+                        data-aos="fade-up" data-aos-delay="200">
+                        <div class="w-10 h-10 shrink-0 rounded-xl bg-brand-blue/20 flex items-center justify-center"><i
+                                data-lucide="users" class="w-5 h-5 text-brand-blue"></i></div>
+                        <div>
+                            <p class="font-bold text-white text-2xl">Expert Team</p>
+                            <p class="text-sm text-gray-500">10+ years experience</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-3 p-4 rounded-2xl bg-white/5 border border-brand-sage/20 hover:border-brand-sage/50 transition-all"
+                        data-aos="fade-up" data-aos-delay="250">
+                        <div class="w-10 h-10 shrink-0 rounded-xl bg-brand-sage/20 flex items-center justify-center"><i
+                                data-lucide="refresh-ccw" class="w-5 h-5 text-brand-sage"></i></div>
+                        <div>
+                            <p class="font-bold text-white text-2xl">Easy Returns</p>
+                            <p class="text-sm text-gray-500">Hassle-free policy</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-3 p-4 rounded-2xl bg-white/5 border border-brand-blue/20 hover:border-brand-blue/50 transition-all"
+                        data-aos="fade-up" data-aos-delay="300">
+                        <div class="w-10 h-10 shrink-0 rounded-xl bg-brand-blue/20 flex items-center justify-center"><i
+                                data-lucide="layers" class="w-5 h-5 text-brand-blue"></i></div>
+                        <div>
+                            <p class="font-bold text-white text-2xl">Wide Selection</p>
+                            <p class="text-sm text-gray-500">All brands & models</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-3 p-4 rounded-2xl bg-white/5 border border-brand-sage/20 hover:border-brand-sage/50 transition-all"
+                        data-aos="fade-up" data-aos-delay="350">
+                        <div class="w-10 h-10 shrink-0 rounded-xl bg-brand-sage/20 flex items-center justify-center"><i
+                                data-lucide="award" class="w-5 h-5 text-brand-sage"></i></div>
+                        <div>
+                            <p class="font-bold text-white text-2xl">Trusted Brand</p>
+                            <p class="text-sm text-gray-500">1000s of customers</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section id="products" class="py-24 bg-brand-light dark:bg-brand-dark transition-colors duration-500">
+        <div class="max-w-7xl mx-auto px-6 sm:px-8 lg:px-8">
+
+            <!-- Section Header -->
+            <div class="text-center mb-16" data-aos="fade-up" data-aos-duration="1000">
+                <div
+                    class="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-brand-blue/30 dark:border-brand-lime/30 bg-brand-blue/5 dark:bg-brand-lime/5 mb-5">
+                    <span class="w-2 h-2 rounded-full bg-brand-blue dark:bg-brand-lime animate-pulse"></span>
+                    <span class="text-xs font-bold tracking-[0.2em] uppercase text-brand-blue dark:text-brand-lime">Our
+                        Products</span>
+                </div>
+                <h2 class="text-4xl md:text-5xl font-extrabold text-brand-dark dark:text-white mb-4 leading-tight">
+                    Spare Parts <span
+                        class="bg-clip-text text-transparent bg-gradient-to-r from-brand-blue to-brand-slate dark:from-brand-lime dark:to-brand-sage">Categories</span>
+                </h2>
+                <p class="text-lg text-brand-slate dark:text-gray-400 max-w-2xl mx-auto font-light">
+                    Browse our wide selection of genuine 3-wheeler spare parts. Click "Ask on WhatsApp" on any category
+                    to get a quick quote from our team.
+                </p>
+            </div>
+
+            <!-- Category Cards Grid -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+
+                <!-- Card 1 – Engine Parts -->
+                <div class="group relative bg-white dark:bg-[#1a1a1a] rounded-2xl overflow-hidden border border-brand-slate/10 dark:border-white/5 hover:border-brand-blue/40 dark:hover:border-brand-lime/40 transition-all duration-400 hover:-translate-y-2 hover:shadow-2xl hover:shadow-brand-blue/10 dark:hover:shadow-brand-lime/10 flex flex-col"
+                    data-aos="fade-up" data-aos-duration="800" data-aos-delay="0">
+                    <!-- Icon Banner -->
+                    <div
+                        class="relative h-36 bg-gradient-to-br from-brand-blue/10 to-brand-blue/5 dark:from-brand-blue/20 dark:to-transparent flex items-center justify-center overflow-hidden">
+                        <div class="absolute inset-0 bg-gradient-to-br from-brand-blue/5 to-transparent"></div>
+                        <div
+                            class="w-16 h-16 rounded-2xl bg-brand-blue/10 dark:bg-brand-blue/20 flex items-center justify-center group-hover:scale-110 transition-transform duration-500">
+                            <i data-lucide="cog" class="w-8 h-8 text-brand-blue dark:text-brand-lime"></i>
+                        </div>
+                    </div>
+                    <!-- Card Body -->
+                    <div class="flex-1 flex flex-col p-5">
+                        <h3 class="text-lg font-bold text-brand-dark dark:text-white mb-1.5">Engine Parts</h3>
+                        <p class="text-sm text-brand-slate dark:text-gray-400 leading-relaxed mb-4">Pistons, cylinder
+                            heads, gaskets, crankshafts, and full engine rebuild kits.</p>
+                        <a href="https://wa.me/94713962285?text=Hello%20Mano%20Motors!%20I%20am%20interested%20in%20*Engine%20Parts*%20for%20my%203-wheeler.%20Please%20help%20me."
+                            target="_blank"
+                            class="mt-auto flex items-center justify-center gap-2 w-full py-3 rounded-xl bg-[#0067B5] hover:bg-[#1ebe5d] text-white text-sm font-bold transition-all duration-300 shadow-md hover:shadow-[#25D366]/40 hover:scale-[1.02]">
+                            <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+                            </svg>
+                            Ask on WhatsApp
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Card 2 – Brake Parts -->
+                <div class="group relative bg-white dark:bg-[#1a1a1a] rounded-2xl overflow-hidden border border-brand-slate/10 dark:border-white/5 hover:border-brand-blue/40 dark:hover:border-brand-lime/40 transition-all duration-400 hover:-translate-y-2 hover:shadow-2xl hover:shadow-brand-blue/10 dark:hover:shadow-brand-lime/10 flex flex-col"
+                    data-aos="fade-up" data-aos-duration="800" data-aos-delay="50">
+                    <div
+                        class="relative h-36 bg-gradient-to-br from-brand-blue/10 to-brand-blue/5 dark:from-brand-blue/20 dark:to-transparent flex items-center justify-center overflow-hidden">
+                        <div class="absolute inset-0 bg-gradient-to-br from-brand-blue/5 to-transparent"></div>
+                        <div
+                            class="w-16 h-16 rounded-2xl bg-brand-blue/10 dark:bg-brand-blue/20 flex items-center justify-center group-hover:scale-110 transition-transform duration-500">
+                            <i data-lucide="disc" class="w-8 h-8 text-brand-blue dark:text-brand-lime"></i>
+                        </div>
+                    </div>
+                    <div class="p-5">
+                        <h3 class="text-lg font-bold text-brand-dark dark:text-white mb-1.5">Brake Parts</h3>
+                        <p class="text-sm text-brand-slate dark:text-gray-400 leading-relaxed mb-4">Brake pads, drums,
+                            shoes, cables, and complete brake overhaul kits.</p>
+                        <a href="https://wa.me/94713962285?text=Hello%20Mano%20Motors!%20I%20am%20interested%20in%20*Brake%20Parts*%20for%20my%203-wheeler.%20Please%20help%20me."
+                            target="_blank"
+                            class="flex items-center justify-center gap-2 w-full py-3 rounded-xl bg-[#0067B5] hover:bg-[#1ebe5d] text-white text-sm font-bold transition-all duration-300 shadow-md hover:shadow-[#25D366]/40 hover:scale-[1.02]">
+                            <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+                            </svg>
+                            Ask on WhatsApp
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Card 3 – Suspension Parts -->
+                <div class="group relative bg-white dark:bg-[#1a1a1a] rounded-2xl overflow-hidden border border-brand-slate/10 dark:border-white/5 hover:border-brand-blue/40 dark:hover:border-brand-lime/40 transition-all duration-400 hover:-translate-y-2 hover:shadow-2xl hover:shadow-brand-blue/10 dark:hover:shadow-brand-lime/10"
+                    data-aos="fade-up" data-aos-duration="800" data-aos-delay="100">
+                    <div
+                        class="relative h-36 bg-gradient-to-br from-brand-blue/10 to-brand-blue/5 dark:from-brand-blue/20 dark:to-transparent flex items-center justify-center overflow-hidden">
+                        <div class="absolute inset-0 bg-gradient-to-br from-brand-blue/5 to-transparent"></div>
+                        <div
+                            class="w-16 h-16 rounded-2xl bg-brand-blue/10 dark:bg-brand-blue/20 flex items-center justify-center group-hover:scale-110 transition-transform duration-500">
+                            <i data-lucide="component" class="w-8 h-8 text-brand-blue dark:text-brand-lime"></i>
+                        </div>
+                    </div>
+                    <div class="p-5">
+                        <h3 class="text-lg font-bold text-brand-dark dark:text-white mb-1.5">Suspension Parts</h3>
+                        <p class="text-sm text-brand-slate dark:text-gray-400 leading-relaxed mb-4">Shock absorbers,
+                            leaf springs, bushings, and axle components.</p>
+                        <a href="https://wa.me/94713962285?text=Hello%20Mano%20Motors!%20I%20am%20interested%20in%20*Suspension%20Parts*%20for%20my%203-wheeler.%20Please%20help%20me."
+                            target="_blank"
+                            class="flex items-center justify-center gap-2 w-full py-3 rounded-xl bg-[#0067B5] hover:bg-[#1ebe5d] text-white text-sm font-bold transition-all duration-300 shadow-md hover:shadow-[#25D366]/40 hover:scale-[1.02]">
+                            <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+                            </svg>
+                            Ask on WhatsApp
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Card 4 – Electrical Components -->
+                <div class="group relative bg-white dark:bg-[#1a1a1a] rounded-2xl overflow-hidden border border-brand-slate/10 dark:border-white/5 hover:border-brand-blue/40 dark:hover:border-brand-lime/40 transition-all duration-400 hover:-translate-y-2 hover:shadow-2xl hover:shadow-brand-blue/10 dark:hover:shadow-brand-lime/10"
+                    data-aos="fade-up" data-aos-duration="800" data-aos-delay="150">
+                    <div
+                        class="relative h-36 bg-gradient-to-br from-brand-blue/10 to-brand-blue/5 dark:from-brand-blue/20 dark:to-transparent flex items-center justify-center overflow-hidden">
+                        <div class="absolute inset-0 bg-gradient-to-br from-brand-blue/5 to-transparent"></div>
+                        <div
+                            class="w-16 h-16 rounded-2xl bg-brand-blue/10 dark:bg-brand-blue/20 flex items-center justify-center group-hover:scale-110 transition-transform duration-500">
+                            <i data-lucide="zap" class="w-8 h-8 text-brand-blue dark:text-brand-lime"></i>
+                        </div>
+                    </div>
+                    <div class="p-5">
+                        <h3 class="text-lg font-bold text-brand-dark dark:text-white mb-1.5">Electrical Components</h3>
+                        <p class="text-sm text-brand-slate dark:text-gray-400 leading-relaxed mb-4">Batteries,
+                            alternators, starters, wiring harnesses, and fuse kits.</p>
+                        <a href="https://wa.me/94713962285?text=Hello%20Mano%20Motors!%20I%20am%20interested%20in%20*Electrical%20Components*%20for%20my%203-wheeler.%20Please%20help%20me."
+                            target="_blank"
+                            class="flex items-center justify-center gap-2 w-full py-3 rounded-xl bg-[#0067B5] hover:bg-[#1ebe5d] text-white text-sm font-bold transition-all duration-300 shadow-md hover:shadow-[#25D366]/40 hover:scale-[1.02]">
+                            <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+                            </svg>
+                            Ask on WhatsApp
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Card 5 – Tires & Wheels -->
+                <div class="group relative bg-white dark:bg-[#1a1a1a] rounded-2xl overflow-hidden border border-brand-slate/10 dark:border-white/5 hover:border-brand-blue/40 dark:hover:border-brand-lime/40 transition-all duration-400 hover:-translate-y-2 hover:shadow-2xl hover:shadow-brand-blue/10 dark:hover:shadow-brand-lime/10"
+                    data-aos="fade-up" data-aos-duration="800" data-aos-delay="0">
+                    <div
+                        class="relative h-36 bg-gradient-to-br from-brand-blue/10 to-brand-blue/5 dark:from-brand-blue/20 dark:to-transparent flex items-center justify-center overflow-hidden">
+                        <div class="absolute inset-0 bg-gradient-to-br from-brand-blue/5 to-transparent"></div>
+                        <div
+                            class="w-16 h-16 rounded-2xl bg-brand-blue/10 dark:bg-brand-blue/20 flex items-center justify-center group-hover:scale-110 transition-transform duration-500">
+                            <i data-lucide="circle" class="w-8 h-8 text-brand-blue dark:text-brand-lime"></i>
+                        </div>
+                    </div>
+                    <div class="p-5">
+                        <h3 class="text-lg font-bold text-brand-dark dark:text-white mb-1.5">Tires & Wheels</h3>
+                        <p class="text-sm text-brand-slate dark:text-gray-400 leading-relaxed mb-4">Front & rear tires,
+                            tubes, rims, and wheel bearings for all models.</p>
+                        <a href="https://wa.me/94713962285?text=Hello%20Mano%20Motors!%20I%20am%20interested%20in%20*Tires%20%26%20Wheels*%20for%20my%203-wheeler.%20Please%20help%20me."
+                            target="_blank"
+                            class="flex items-center justify-center gap-2 w-full py-3 rounded-xl bg-[#0067B5] hover:bg-[#1ebe5d] text-white text-sm font-bold transition-all duration-300 shadow-md hover:shadow-[#25D366]/40 hover:scale-[1.02]">
+                            <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+                            </svg>
+                            Ask on WhatsApp
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Card 6 – Body Parts -->
+                <div class="group relative bg-white dark:bg-[#1a1a1a] rounded-2xl overflow-hidden border border-brand-slate/10 dark:border-white/5 hover:border-brand-blue/40 dark:hover:border-brand-lime/40 transition-all duration-400 hover:-translate-y-2 hover:shadow-2xl hover:shadow-brand-blue/10 dark:hover:shadow-brand-lime/10"
+                    data-aos="fade-up" data-aos-duration="800" data-aos-delay="50">
+                    <div
+                        class="relative h-36 bg-gradient-to-br from-brand-blue/10 to-brand-blue/5 dark:from-brand-blue/20 dark:to-transparent flex items-center justify-center overflow-hidden">
+                        <div class="absolute inset-0 bg-gradient-to-br from-brand-blue/5 to-transparent"></div>
+                        <div
+                            class="w-16 h-16 rounded-2xl bg-brand-blue/10 dark:bg-brand-blue/20 flex items-center justify-center group-hover:scale-110 transition-transform duration-500">
+                            <i data-lucide="box" class="w-8 h-8 text-brand-blue dark:text-brand-lime"></i>
+                        </div>
+                    </div>
+                    <div class="p-5">
+                        <h3 class="text-lg font-bold text-brand-dark dark:text-white mb-1.5">Body Parts</h3>
+                        <p class="text-sm text-brand-slate dark:text-gray-400 leading-relaxed mb-4">Covers, panels,
+                            hoods, floorboards, handles, and structural frame parts.</p>
+                        <a href="https://wa.me/94713962285?text=Hello%20Mano%20Motors!%20I%20am%20interested%20in%20*Body%20Parts*%20for%20my%203-wheeler.%20Please%20help%20me."
+                            target="_blank"
+                            class="flex items-center justify-center gap-2 w-full py-3 rounded-xl bg-[#0067B5] hover:bg-[#1ebe5d] text-white text-sm font-bold transition-all duration-300 shadow-md hover:shadow-[#25D366]/40 hover:scale-[1.02]">
+                            <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+                            </svg>
+                            Ask on WhatsApp
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Card 7 – Lighting & Indicators -->
+                <div class="group relative bg-white dark:bg-[#1a1a1a] rounded-2xl overflow-hidden border border-brand-slate/10 dark:border-white/5 hover:border-brand-blue/40 dark:hover:border-brand-lime/40 transition-all duration-400 hover:-translate-y-2 hover:shadow-2xl hover:shadow-brand-blue/10 dark:hover:shadow-brand-lime/10"
+                    data-aos="fade-up" data-aos-duration="800" data-aos-delay="100">
+                    <div
+                        class="relative h-36 bg-gradient-to-br from-brand-blue/10 to-brand-blue/5 dark:from-brand-blue/20 dark:to-transparent flex items-center justify-center overflow-hidden">
+                        <div class="absolute inset-0 bg-gradient-to-br from-brand-blue/5 to-transparent"></div>
+                        <div
+                            class="w-16 h-16 rounded-2xl bg-brand-blue/10 dark:bg-brand-blue/20 flex items-center justify-center group-hover:scale-110 transition-transform duration-500">
+                            <i data-lucide="lightbulb" class="w-8 h-8 text-brand-blue dark:text-brand-lime"></i>
+                        </div>
+                    </div>
+                    <div class="p-5">
+                        <h3 class="text-lg font-bold text-brand-dark dark:text-white mb-1.5">Lighting & Indicators</h3>
+                        <p class="text-sm text-brand-slate dark:text-gray-400 leading-relaxed mb-4">Headlights, tail
+                            lights, turn signal bulbs, and LED conversion kits.</p>
+                        <a href="https://wa.me/94713962285?text=Hello%20Mano%20Motors!%20I%20am%20interested%20in%20*Lighting%20%26%20Indicators*%20for%20my%203-wheeler.%20Please%20help%20me."
+                            target="_blank"
+                            class="flex items-center justify-center gap-2 w-full py-3 rounded-xl bg-[#0067B5] hover:bg-[#1ebe5d] text-white text-sm font-bold transition-all duration-300 shadow-md hover:shadow-[#25D366]/40 hover:scale-[1.02]">
+                            <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+                            </svg>
+                            Ask on WhatsApp
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Card 8 – Maintenance Accessories -->
+                <div class="group relative bg-white dark:bg-[#1a1a1a] rounded-2xl overflow-hidden border border-brand-slate/10 dark:border-white/5 hover:border-brand-blue/40 dark:hover:border-brand-lime/40 transition-all duration-400 hover:-translate-y-2 hover:shadow-2xl hover:shadow-brand-blue/10 dark:hover:shadow-brand-lime/10"
+                    data-aos="fade-up" data-aos-duration="800" data-aos-delay="150">
+                    <div
+                        class="relative h-36 bg-gradient-to-br from-brand-blue/10 to-brand-blue/5 dark:from-brand-blue/20 dark:to-transparent flex items-center justify-center overflow-hidden">
+                        <div class="absolute inset-0 bg-gradient-to-br from-brand-blue/5 to-transparent"></div>
+                        <div
+                            class="w-16 h-16 rounded-2xl bg-brand-blue/10 dark:bg-brand-blue/20 flex items-center justify-center group-hover:scale-110 transition-transform duration-500">
+                            <i data-lucide="wrench" class="w-8 h-8 text-brand-dark dark:text-brand-lime"></i>
+                        </div>
+                    </div>
+                    <div class="p-5">
+                        <h3 class="text-lg font-bold text-brand-dark dark:text-white mb-1.5">Maintenance Accessories
+                        </h3>
+                        <p class="text-sm text-brand-slate dark:text-gray-400 leading-relaxed mb-4">Engine oil, filters,
+                            belts, spark plugs, and essential servicing items.</p>
+                        <a href="https://wa.me/94713962285?text=Hello%20Mano%20Motors!%20I%20am%20interested%20in%20*Maintenance%20Accessories*%20for%20my%203-wheeler.%20Please%20help%20me."
+                            target="_blank"
+                            class="flex items-center justify-center gap-2 w-full py-3 rounded-xl bg-[#0067B5] hover:bg-[#1ebe5d] text-white text-sm font-bold transition-all duration-300 shadow-md hover:shadow-[#25D366]/40 hover:scale-[1.02]">
+                            <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+                            </svg>
+                            Ask on WhatsApp
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+            <!-- Bottom CTA Banner -->
+            <div class="mt-16 rounded-3xl bg-gradient-to-r from-brand-blue to-brand-slate dark:from-brand-blue/80 dark:to-brand-slate/60 p-8 md:p-12 flex flex-col md:flex-row items-center justify-between gap-6 shadow-xl"
+                data-aos="fade-up" data-aos-duration="1000">
+                <div>
+                    <h3 class="text-2xl md:text-3xl font-extrabold text-white mb-2">Can't find a part?</h3>
+                    <p class="text-brand-light/80 text-lg">Message us directly and we'll source it for you — fast.</p>
+                </div>
+                <a href="https://wa.me/94713962285?text=Hello%20Mano%20Motors!%20I%20need%20help%20finding%20a%20spare%20part%20for%20my%203-wheeler."
+                    target="_blank"
+                    class="shrink-0 flex items-center gap-3 bg-[#0067B7] hover:bg-[#1ebe5d] text-white px-8 py-4 rounded-2xl font-bold text-lg transition-all duration-300 shadow-lg hover:shadow-[#25D366]/50 hover:-translate-y-1">
+                    <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+                    </svg>
+                    Chat on WhatsApp
+                </a>
+            </div>
+        </div>
+        <!-- Services Section -->
+        <section id="services"
+            class="py-24 bg-brand-light dark:bg-brand-dark transition-colors duration-500 border-t border-brand-slate/10 dark:border-white/5">
+            <div class="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
+                <!-- Section Header -->
+                <div class="text-center mb-16" data-aos="fade-up">
+                    <div
+                        class="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-brand-blue/30 dark:border-brand-lime/30 bg-brand-blue/5 dark:bg-brand-lime/5 mb-5">
+                        <span class="w-2 h-2 rounded-full bg-brand-blue dark:bg-brand-lime animate-pulse"></span>
+                        <span
+                            class="text-xs font-bold tracking-[0.2em] uppercase text-brand-blue dark:text-brand-lime">Our
+                            Value</span>
+                    </div>
+                    <h2 class="text-4xl md:text-5xl font-extrabold text-brand-dark dark:text-white mb-4 leading-tight">
+                        Premium <span
+                            class="bg-clip-text text-transparent bg-gradient-to-r from-brand-blue to-brand-slate dark:from-brand-lime dark:to-brand-sage">Services</span>
+                    </h2>
+                    <p class="text-lg text-brand-slate dark:text-gray-400 max-w-2xl mx-auto font-light">
+                        Beyond just parts, we provide the support and reliability your vehicle deserves.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <!-- Service 1: Repair -->
+                    <div class="group p-8 rounded-3xl bg-white dark:bg-[#1a1a1a] border border-brand-slate/10 dark:border-white/5 hover:border-brand-blue/40 dark:hover:border-brand-lime/40 transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl hover:shadow-brand-blue/10"
+                        data-aos="fade-up" data-aos-delay="0">
+                        <div
+                            class="w-14 h-14 rounded-2xl bg-brand-blue/10 dark:bg-brand-blue/20 flex items-center justify-center mb-6 group-hover:scale-110 group-hover:bg-brand-blue group-hover:text-white transition-all duration-500 text-brand-blue dark:text-brand-lime">
+                            <i data-lucide="wrench" class="w-7 h-7"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-brand-dark dark:text-white mb-3">Expert Repair</h3>
+                        <p class="text-brand-slate dark:text-gray-400 text-sm leading-relaxed mb-6">Professional
+                            maintenance and repair services by experienced 3-wheeler mechanics.</p>
+                    </div>
+
+                    <!-- Service 2: Delivery -->
+                    <div class="group p-8 rounded-3xl bg-white dark:bg-[#1a1a1a] border border-brand-slate/10 dark:border-white/5 hover:border-brand-blue/40 dark:hover:border-brand-lime/40 transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl hover:shadow-brand-blue/10"
+                        data-aos="fade-up" data-aos-delay="100">
+                        <div
+                            class="w-14 h-14 rounded-2xl bg-brand-blue/10 dark:bg-brand-blue/20 flex items-center justify-center mb-6 group-hover:scale-110 group-hover:bg-brand-blue group-hover:text-white transition-all duration-500 text-brand-blue dark:text-brand-lime">
+                            <i data-lucide="truck" class="w-7 h-7"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-brand-dark dark:text-white mb-3">Fast Delivery</h3>
+                        <p class="text-brand-slate dark:text-gray-400 text-sm leading-relaxed mb-6">Quick and reliable
+                            island-wide delivery ensuring your parts arrive on time.</p>
+                    </div>
+
+                    <!-- Service 3: Warranty -->
+                    <div class="group p-8 rounded-3xl bg-white dark:bg-[#1a1a1a] border border-brand-slate/10 dark:border-white/5 hover:border-brand-blue/40 dark:hover:border-brand-lime/40 transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl hover:shadow-brand-blue/10"
+                        data-aos="fade-up" data-aos-delay="200">
+                        <div
+                            class="w-14 h-14 rounded-2xl bg-brand-blue/10 dark:bg-brand-blue/20 flex items-center justify-center mb-6 group-hover:scale-110 group-hover:bg-brand-blue group-hover:text-white transition-all duration-500 text-brand-blue dark:text-brand-lime">
+                            <i data-lucide="shield-check" class="w-7 h-7"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-brand-dark dark:text-white mb-3">Official Warranty</h3>
+                        <p class="text-brand-slate dark:text-gray-400 text-sm leading-relaxed mb-6">Shop with confidence
+                            knowing all our genuine parts come with full warranty coverage.</p>
+                    </div>
+
+                    <!-- Service 4: Support -->
+                    <div class="group p-8 rounded-3xl bg-white dark:bg-[#1a1a1a] border border-brand-slate/10 dark:border-white/5 hover:border-brand-blue/40 dark:hover:border-brand-lime/40 transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl hover:shadow-brand-blue/10"
+                        data-aos="fade-up" data-aos-delay="300">
+                        <div
+                            class="w-14 h-14 rounded-2xl bg-brand-blue/10 dark:bg-brand-blue/20 flex items-center justify-center mb-6 group-hover:scale-110 group-hover:bg-brand-blue group-hover:text-white transition-all duration-500 text-brand-blue dark:text-brand-lime">
+                            <i data-lucide="headphones" class="w-7 h-7"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-brand-dark dark:text-white mb-3">24/7 Support</h3>
+                        <p class="text-brand-slate dark:text-gray-400 text-sm leading-relaxed mb-6">Expert technical
+                            advice and assistance available via WhatsApp at any time.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="bg-[#202020] pt-20 pb-10 overflow-hidden relative">
+            <div class="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 relative z-10">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8 mb-16">
+                    <!-- Column 1: Brand -->
+                    <div data-aos="fade-up" data-aos-delay="0">
+                        <div class="flex items-center gap-2 mb-6">
+                            <div>
+                                <img src="assets/Mano Motors logo.png" alt="Mano Motors Logo" class="w-20 h-20">
+                            </div>
+                            <span class="text-2xl font-black text-brand-light tracking-tighter">Mano<span
+                                    class="text-brand-blue">Motors</span></span>
+                        </div>
+                        <p class="text-brand-light/90 mb-8 leading-relaxed max-w-xs">
+                            Premier destination for genuine 3-wheeler spare parts. Quality you can trust, service you
+                            can rely on.
+                        </p>
+                        <div class="flex gap-4">
+                            <a href="#"
+                                class="w-10 h-10 rounded-xl bg-brand-light/10 border border-brand-light/20 flex items-center justify-center text-brand-light hover:bg-brand-blue hover:border-brand-blue transition-all duration-300">
+                                <i data-lucide="facebook" class="w-5 h-5"></i>
+                            </a>
+                            <a href="#"
+                                class="w-10 h-10 rounded-xl bg-brand-light/10 border border-brand-light/20 flex items-center justify-center text-brand-light hover:bg-brand-blue hover:border-brand-blue transition-all duration-300">
+                                <i data-lucide="instagram" class="w-5 h-5"></i>
+                            </a>
+                            <a href="#"
+                                class="w-10 h-10 rounded-xl bg-brand-light/10 border border-brand-light/20 flex items-center justify-center text-brand-light hover:bg-brand-blue hover:border-brand-blue transition-all duration-300">
+                                <i data-lucide="twitter" class="w-5 h-5"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Column 2: Quick Links -->
+                    <div data-aos="fade-up" data-aos-delay="100">
+                        <h4 class="text-brand-blue font-bold text-lg mb-6 uppercase tracking-wider">Quick Links</h4>
+                        <ul class="space-y-4">
+                            <li><a href="#hero"
+                                    class="text-brand-light hover:text-brand-blue transition-colors flex items-center gap-2 group"><span
+                                        class="w-1.5 h-1.5 rounded-full bg-brand-blue opacity-0 group-hover:opacity-100 transition-all"></span>Home</a>
+                            </li>
+                            <li><a href="#about"
+                                    class="text-brand-light hover:text-brand-blue transition-colors flex items-center gap-2 group"><span
+                                        class="w-1.5 h-1.5 rounded-full bg-brand-blue opacity-0 group-hover:opacity-100 transition-all"></span>About
+                                    Us</a></li>
+                            <li><a href="#products"
+                                    class="text-brand-light hover:text-brand-blue transition-colors flex items-center gap-2 group"><span
+                                        class="w-1.5 h-1.5 rounded-full bg-brand-blue opacity-0 group-hover:opacity-100 transition-all"></span>Spare
+                                    Parts</a></li>
+                            <li><a href="#why-us"
+                                    class="text-brand-light hover:text-brand-blue transition-colors flex items-center gap-2 group"><span
+                                        class="w-1.5 h-1.5 rounded-full bg-brand-blue opacity-0 group-hover:opacity-100 transition-all"></span>Why
+                                    Choose Us</a></li>
+                            <li><a href="#gallery"
+                                    class="text-brand-light hover:text-brand-blue transition-colors flex items-center gap-2 group"><span
+                                        class="w-1.5 h-1.5 rounded-full bg-brand-blue opacity-0 group-hover:opacity-100 transition-all"></span>Gallery</a>
+                            </li>
+                            <li><a href="#contact"
+                                    class="text-brand-light hover:text-brand-blue transition-colors flex items-center gap-2 group"><span
+                                        class="w-1.5 h-1.5 rounded-full bg-brand-blue opacity-0 group-hover:opacity-100 transition-all"></span>Contact</a>
+                            </li>
+
+                        </ul>
+                    </div>
+
+                    <!-- Column 3: Contact Info -->
+                    <div data-aos="fade-up" data-aos-delay="200">
+                        <h4 class="text-brand-blue font-bold text-lg mb-6 uppercase tracking-wider">Contact Info</h4>
+                        <ul class="space-y-5">
+                            <li class="flex items-start gap-4">
+                                <div
+                                    class="w-10 h-10 shrink-0 rounded-xl bg-brand-blue/10 flex items-center justify-center text-brand-blue border border-brand-blue/20">
+                                    <i data-lucide="phone" class="w-5 h-5"></i>
+                                </div>
+                                <div>
+                                    <p class="text-xs text-brand-light/60 uppercase font-bold tracking-tighter">Phone
+                                        Number</p>
+                                    <p class="text-brand-light font-medium">+94 71 396 2285</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start gap-4">
+                                <div
+                                    class="w-10 h-10 shrink-0 rounded-xl bg-brand-blue/10 flex items-center justify-center text-brand-blue border border-brand-blue/20">
+                                    <i data-lucide="mail" class="w-5 h-5"></i>
+                                </div>
+                                <div>
+                                    <p class="text-xs text-brand-light/60 uppercase font-bold tracking-tighter">Email
+                                        Address</p>
+                                    <p class="text-brand-light font-medium">manomotors94@gmail.com</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start gap-4">
+                                <div
+                                    class="w-10 h-10 shrink-0 rounded-xl bg-brand-blue/10 flex items-center justify-center text-brand-blue border border-brand-blue/20">
+                                    <i data-lucide="map-pin" class="w-5 h-5"></i>
+                                </div>
+                                <div>
+                                    <p class="text-xs text-brand-light/60 uppercase font-bold tracking-tighter">Location
+                                    </p>
+                                    <p class="text-brand-light font-medium">Upcot Rd- Maskeliya 22075, Sri Lanka</p>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Column 4: Newsletter -->
+                    <div data-aos="fade-up" data-aos-delay="300">
+                        <h4 class="text-brand-blue font-bold text-lg mb-6 uppercase tracking-wider">Store Hours</h4>
+                        <div class="bg-brand-light/10 border border-brand-light/20 p-6 rounded-2xl">
+                            <ul class="space-y-3">
+                                <li class="flex justify-between items-center text-sm">
+                                    <span class="text-brand-light/60">Mon - Sun:</span>
+                                    <span class="text-brand-light font-bold">8:30 AM - 9:00 PM</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Copyright Bar -->
+                <div
+                    class="pt-8 border-t border-brand-light/10 flex flex-col md:flex-row justify-between items-center gap-6">
+                    <p class="text-brand-light/60 text-sm font-medium">
+                        &copy; 2024 <span class="text-brand-light font-bold">Mano Motors</span>. All rights reserved.
+                    </p>
+                    <!-- Owner Login Button (Subtle) -->
+                    <button id="owner-login-trigger" class="text-xs text-brand-light/20 hover:text-brand-blue transition-colors px-2 py-1">
+                        Owner Login
+                    </button>
+                    <div class="flex items-center gap-2 group">
+                        <p class="text-brand-light/60 text-sm">Solution From</p>
+                        <a href="#"
+                            class="px-4 py-1.5 rounded-full bg-brand-dark/20 border border-white/5 text-brand-blue font-black text-sm hover:bg-brand-blue hover:text-white transition-all duration-400">
+                            Thilak Dev
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Decoration -->
+            <div class="absolute -bottom-20 -right-20 w-80 h-80 bg-brand-blue/20 blur-[100px] rounded-full"></div>
+            <div class="absolute -top-20 -left-20 w-60 h-60 bg-brand-blue/10 blur-[80px] rounded-full"></div>
+        </footer>
+
+
+        <!-- Owner Login Modal -->
+        <div id="owner-login-modal" class="fixed inset-0 z-[100] hidden items-center justify-center p-4 bg-black/80 backdrop-blur-sm transition-opacity duration-300 opacity-0">
+            <div class="bg-brand-dark border border-white/10 w-full max-w-md p-8 rounded-3xl shadow-2xl transform scale-95 transition-transform duration-300">
+                <div class="flex justify-between items-center mb-6">
+                    <h2 class="text-2xl font-bold text-white uppercase tracking-tighter">Owner Login</h2>
+                    <button id="close-login-modal" class="text-gray-400 hover:text-white transition-colors">
+                        <i data-lucide="x" class="w-6 h-6"></i>
+                    </button>
+                </div>
+                <form id="owner-login-form" class="space-y-6">
+                    <div>
+                        <label for="owner-email" class="block text-sm font-semibold text-gray-400 mb-2">Email Address</label>
+                        <input type="email" id="owner-email" required
+                            class="w-full px-4 py-3 rounded-xl bg-brand-light/5 border border-white/10 text-white focus:border-brand-blue outline-none transition-all"
+                            placeholder="owner@gmail.com">
+                    </div>
+                    <div>
+                        <label for="owner-password" class="block text-sm font-semibold text-gray-400 mb-2">Password</label>
+                        <input type="password" id="owner-password" required
+                            class="w-full px-4 py-3 rounded-xl bg-brand-light/5 border border-white/10 text-white focus:border-brand-blue outline-none transition-all"
+                            placeholder="••••••">
+                    </div>
+                    <p id="login-error" class="text-red-500 text-sm font-medium hidden">Invalid login credentials</p>
+                    <button type="submit"
+                        class="w-full bg-brand-blue hover:bg-brand-blue/90 text-white font-bold py-4 rounded-xl transition-all shadow-lg transform hover:-translate-y-1">
+                        Login to Dashboard
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Scripts -->
+        <script src="script.js?v=1.0.2" defer></script>
+</body>
+
+</html>

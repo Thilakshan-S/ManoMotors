@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="Icon" href="assets/Mano Motors logo.png">
+    <title>Gallery | Mano Motors</title>
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- AOS Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            blue: '#0067B5',
+                            slate: '#95AFBA',
+                            sage: '#BDC4A7',
+                            lime: '#D5E1A3',
+                            light: '#FCFFF4',
+                            dark: '#111111'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        .gallery-card {
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .gallery-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .gallery-img {
+            transition: transform 0.8s ease;
+        }
+
+        .gallery-card:hover .gallery-img {
+            transform: scale(1.1);
+        }
+
+        /* Lightbox Styles */
+        #lightbox {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        #lightbox.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        .lightbox-content {
+            max-width: 90%;
+            max-height: 80vh;
+            object-fit: contain;
+            border-radius: 1rem;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            transform: scale(0.9);
+            transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        #lightbox.active .lightbox-content {
+            transform: scale(1);
+        }
+    </style>
+</head>
+
+<body
+    class="bg-brand-light dark:bg-brand-dark text-gray-800 dark:text-gray-200 transition-colors duration-300 min-h-screen flex flex-col">
+
+    <!-- Navigation Bar -->
+    <nav class="sticky top-0 w-full z-50 transition-all duration-300 bg-brand-blue shadow-none" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Logo -->
+                <div class="flex-shrink-0 flex items-center gap-2">
+                    <img src="assets/Mano Motors logo.png" alt="Mano Motors Logo" class="w-12 h-12">
+                    <a href="index.html"
+                        class="font-bold text-2xl tracking-tight text-brand-light hover:text-brand-lime transition-colors">
+                        Mano Motors
+                    </a>
+                </div>
+
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="index.html#home"
+                        class="font-medium text-brand-light hover:text-brand-lime transition-colors">Home</a>
+                    <a href="index.html#about"
+                        class="font-medium text-brand-light hover:text-brand-lime transition-colors">About Us</a>
+                    <a href="#"
+                        class="font-medium text-brand-lime transition-colors border-b-2 border-brand-lime">Gallery</a>
+                    <a href="contact.html"
+                        class="font-medium text-brand-light hover:text-brand-lime transition-colors">Contact</a>
+
+                    <!-- Dark Mode Toggle -->
+                    <button id="theme-toggle"
+                        class="p-2 rounded-full hover:bg-brand-light/20 transition-all text-brand-light hover:text-brand-lime focus:outline-none">
+                        <i data-lucide="moon" id="theme-toggle-dark-icon" class="w-5 h-5 hidden"></i>
+                        <i data-lucide="sun" id="theme-toggle-light-icon" class="w-5 h-5 hidden"></i>
+                    </button>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden flex items-center gap-4">
+                    <button id="theme-toggle-mobile"
+                        class="p-2 rounded-full hover:bg-brand-light/20 transition-all text-brand-light">
+                        <i data-lucide="moon" id="theme-toggle-dark-icon-mobile" class="w-5 h-5 hidden"></i>
+                        <i data-lucide="sun" id="theme-toggle-light-icon-mobile" class="w-5 h-5 hidden"></i>
+                    </button>
+                    <button id="mobile-menu-button"
+                        class="text-brand-light hover:text-brand-lime focus:outline-none p-2 transition-transform">
+                        <i data-lucide="menu" class="w-6 h-6" id="menu-icon"></i>
+                        <i data-lucide="x" class="w-6 h-6 hidden" id="close-icon"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile Menu Overlay -->
+        <div id="mobile-menu"
+            class="md:hidden absolute w-full shadow-lg bg-brand-blue border-brand-light/20 overflow-hidden transition-all duration-300 ease-in-out opacity-0 max-h-0 border-t-0 pointer-events-none">
+            <div class="px-4 py-4 space-y-2 flex flex-col">
+                <a href="index.html#home"
+                    class="mobile-link block px-4 py-3 rounded-md text-base font-medium text-brand-light hover:bg-brand-light/10 hover:text-brand-lime transition-all">Home</a>
+                <a href="index.html#about"
+                    class="mobile-link block px-4 py-3 rounded-md text-base font-medium text-brand-light hover:bg-brand-light/10 hover:text-brand-lime transition-all">About
+                    Us</a>
+                <a href="#"
+                    class="mobile-link block px-4 py-3 rounded-md text-base font-medium text-brand-lime bg-brand-light/10 transition-all">Gallery</a>
+                <a href="contact.html"
+                    class="mobile-link block px-4 py-3 rounded-md text-base font-medium text-brand-light hover:bg-brand-light/10 hover:text-brand-lime transition-all">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header -->
+    <header class="py-20 bg-white dark:bg-[#07090e] transition-colors duration-500 overflow-hidden text-center">
+        <div class="max-w-7xl mx-auto px-6">
+            <h1 class="text-6xl font-black text-brand-dark dark:text-white uppercase tracking-tighter mb-4"
+                data-aos="fade-down">
+                Our <span class="text-brand-blue dark:text-brand-lime">Gallery</span>
+            </h1>
+            <p class="text-brand-slate dark:text-gray-400 text-lg max-w-2xl mx-auto" data-aos="fade-up"
+                data-aos-delay="200">
+                A showcase of our high-quality spare parts and professional services.
+            </p>
+        </div>
+    </header>
+
+    <!-- Gallery Grid -->
+    <main class="flex-grow py-16 px-6 bg-brand-light dark:bg-brand-dark transition-colors duration-500">
+        <div id="gallery-container" class="max-w-7xl mx-auto grid auto-cols-auto sm:grid-cols-2 lg:grid-cols-3 gap-10">
+            <!-- Dynamic Items will be injected here -->
+        </div>
+
+        <!-- Empty State -->
+        <div id="empty-gallery" class="hidden text-center py-20">
+            <div class="w-20 h-20 bg-brand-blue/10 rounded-full flex items-center justify-center mx-auto mb-6">
+                <i data-lucide="image-off" class="w-10 h-10 text-brand-blue"></i>
+            </div>
+            <h2 class="text-2xl font-bold text-brand-dark dark:text-white mb-2">No items in the gallery</h2>
+            <p class="text-brand-slate dark:text-gray-400">Please check back later.</p>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-brand-blue text-white py-12">
+        <div class="max-w-7xl mx-auto px-6 text-center">
+            <p class="text-sm opacity-80">&copy; 2026 Mano Motors. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Lightbox Modal -->
+    <div id="lightbox" onclick="closeLightbox()">
+        <button class="absolute top-8 right-8 text-white hover:text-brand-lime transition-colors" onclick="closeLightbox()">
+            <i data-lucide="x" class="w-10 h-10"></i>
+        </button>
+        <img id="lightbox-img" src="" alt="" class="lightbox-content" onclick="event.stopPropagation()">
+        <div class="mt-8 text-center px-6 max-w-2xl" onclick="event.stopPropagation()">
+            <h2 id="lightbox-title" class="text-3xl font-black text-white uppercase tracking-tighter mb-2"></h2>
+            <p id="lightbox-desc" class="text-brand-slate text-lg"></p>
+        </div>
+    </div>
+
+    <script>
+        // Initialize Lucide Icons
+        lucide.createIcons();
+
+        // Initialize AOS
+        AOS.init({ duration: 800, once: true });
+
+        // Dark Mode Logic (Shared)
+        function applyTheme() {
+            if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                document.documentElement.classList.add('dark');
+                document.getElementById('theme-toggle-light-icon')?.classList.remove('hidden');
+                document.getElementById('theme-toggle-light-icon-mobile')?.classList.remove('hidden');
+            } else {
+                document.getElementById('theme-toggle-dark-icon')?.classList.remove('hidden');
+                document.getElementById('theme-toggle-dark-icon-mobile')?.classList.remove('hidden');
+            }
+        }
+        applyTheme();
+
+        function toggleTheme() {
+            document.documentElement.classList.toggle('dark');
+            const isDark = document.documentElement.classList.contains('dark');
+            localStorage.setItem('color-theme', isDark ? 'dark' : 'light');
+
+            document.getElementById('theme-toggle-dark-icon').classList.toggle('hidden');
+            document.getElementById('theme-toggle-light-icon').classList.toggle('hidden');
+            document.getElementById('theme-toggle-dark-icon-mobile').classList.toggle('hidden');
+            document.getElementById('theme-toggle-light-icon-mobile').classList.toggle('hidden');
+        }
+
+        document.getElementById('theme-toggle').addEventListener('click', toggleTheme);
+        document.getElementById('theme-toggle-mobile').addEventListener('click', toggleTheme);
+
+        // Mobile Menu
+        const mobileMenuBtn = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const menuIcon = document.getElementById('menu-icon');
+        const closeIcon = document.getElementById('close-icon');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('max-h-0');
+            mobileMenu.classList.toggle('max-h-screen');
+            mobileMenu.classList.toggle('opacity-0');
+            mobileMenu.classList.toggle('opacity-100');
+            menuIcon.classList.toggle('hidden');
+            closeIcon.classList.toggle('hidden');
+            mobileMenu.classList.toggle('pointer-events-none');
+        });
+
+        // Dynamic Gallery Loading
+        function loadGallery() {
+            const container = document.getElementById('gallery-container');
+            const emptyState = document.getElementById('empty-gallery');
+            const items = JSON.parse(localStorage.getItem('mano_motors_gallery') || '[]');
+
+            if (items.length === 0) {
+                emptyState.classList.remove('hidden');
+                return;
+            }
+
+            emptyState.classList.add('hidden');
+            container.innerHTML = items.map((item, index) => {
+                // Sanitize content to prevent broken HTML attributes
+                const safeHeading = (item.heading || 'Part').replace(/"/g, '&quot;');
+                const safeParagraph = (item.paragraph || '').replace(/"/g, '&quot;');
+                const animationDelay = Math.min(index * 100, 1000); // Cap delay at 1s for better UX
+
+                return `
+                <div class="gallery-card group bg-white dark:bg-[#1a1a1a] rounded-[2.5rem] overflow-hidden shadow-xl border border-gray-100 dark:border-white/5 cursor-pointer"
+                    data-aos="fade-up" data-aos-delay="${animationDelay}" onclick="openLightbox(${index})">
+                    <div class="relative h-72 overflow-hidden">
+                        <img src="${item.image || 'https://placehold.co/600x400?text=No+Image'}"
+                            alt="${safeHeading}"
+                            class="gallery-img w-full h-full object-cover">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-8">
+                                <span class="text-white text-xs font-bold uppercase tracking-widest flex items-center gap-2">
+                                    <i data-lucide="maximize-2" class="w-4 h-4"></i> View Full Image
+                                </span>
+                            </div>
+                    </div>
+                    <div class="p-8">
+                        <h3 class="text-2xl font-black text-brand-dark dark:text-white uppercase tracking-tighter mb-3 leading-tight">${safeHeading}</h3>
+                        <p class="text-brand-slate dark:text-gray-400 text-sm leading-relaxed line-clamp-2">${safeParagraph}</p>
+                    </div>
+                </div>
+                `;
+            }).join('');
+
+            lucide.createIcons();
+            // Re-init AOS for new elements
+            AOS.refresh();
+        }
+
+        // Lightbox Logic
+        window.openLightbox = (index) => {
+            const items = JSON.parse(localStorage.getItem('mano_motors_gallery') || '[]');
+            const item = items[index];
+            if (!item) return;
+
+            const lightbox = document.getElementById('lightbox');
+            const img = document.getElementById('lightbox-img');
+            const title = document.getElementById('lightbox-title');
+            const desc = document.getElementById('lightbox-desc');
+
+            img.src = item.image;
+            title.textContent = item.heading;
+            desc.textContent = item.paragraph;
+
+            lightbox.classList.add('active');
+            document.body.style.overflow = 'hidden'; // Prevent scroll
+        };
+
+        window.closeLightbox = () => {
+            const lightbox = document.getElementById('lightbox');
+            lightbox.classList.remove('active');
+            document.body.style.overflow = ''; // Restore scroll
+        };
+
+        document.addEventListener('DOMContentLoaded', loadGallery);
+
+        // Navbar Scroll Effect
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 10) {
+                navbar.classList.add('shadow-lg', 'bg-brand-blue/95', 'backdrop-blur-md');
+                navbar.classList.remove('shadow-none');
+            } else {
+                navbar.classList.remove('shadow-lg', 'bg-brand-blue/95', 'backdrop-blur-md');
+                navbar.classList.add('shadow-none');
+            }
+        });
+    </script>
+</body>
+
+</html>
