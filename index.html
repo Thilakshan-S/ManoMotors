@@ -11,13 +11,20 @@
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
 
+    <!-- Preconnect & DNS Prefetch for performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="dns-prefetch" href="https://cdn.tailwindcss.com">
+    <link rel="dns-prefetch" href="https://unpkg.com">
+
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Lucide Icons -->
-    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://unpkg.com/lucide@latest" defer></script>
     <!-- AOS Library (Animate on Scroll) -->
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css"></noscript>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js" defer></script>
     <script>
         tailwind.config = {
             darkMode: 'class',
@@ -73,6 +80,32 @@
 
 <body class="bg-brand-light dark:bg-brand-dark text-gray-800 dark:text-gray-200 transition-colors duration-300">
 
+    <!-- Preloader -->
+    <div id="preloader" class="fixed inset-0 z-[9999] bg-brand-light dark:bg-brand-dark flex flex-col items-center justify-center transition-opacity duration-500">
+        <div class="relative w-24 h-24 flex items-center justify-center">
+            <!-- Outer spinning gear -->
+            <svg class="absolute w-full h-full text-brand-blue dark:text-brand-lime animate-[spin_3s_linear_infinite]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/>
+                <circle cx="12" cy="12" r="3"/>
+            </svg>
+            <!-- Inner pulse -->
+            <div class="absolute w-6 h-6 rounded-full bg-brand-blue dark:bg-brand-lime animate-pulse"></div>
+        </div>
+        <div class="mt-6 text-brand-blue dark:text-brand-lime font-bold tracking-[0.3em] text-sm animate-pulse uppercase">Loading</div>
+    </div>
+    <script>
+        // Inline script to hide preloader exactly when page fully loads, preventing performance hits
+        window.addEventListener('load', function() {
+            const preloader = document.getElementById('preloader');
+            if (preloader) {
+                preloader.style.opacity = '0';
+                setTimeout(() => {
+                    preloader.style.display = 'none';
+                }, 500); // Wait for CSS opacity transition
+            }
+        });
+    </script>
+
     <!-- Navigation Bar -->
     <nav class="sticky top-0 w-full z-50 transition-all duration-300 bg-brand-blue shadow-none" id="navbar">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -80,7 +113,7 @@
                 <!-- Logo -->
                 <div class="flex-shrink-0 flex items-center gap-2">
                     <div class="text-brand-blue p-2 ">
-                        <img src="assets/Mano Motors logo.png" alt="Mano Motors Logo" class="w-20 h-20">
+                        <img src="assets/Mano Motors logo.png" alt="Mano Motors Logo" class="w-20 h-20" fetchpriority="high">
                     </div>
                     <a href="#"
                         class="font-bold text-2xl tracking-tight text-brand-light hover:text-brand-lime transition-colors">
@@ -302,7 +335,7 @@
             </div>
 
             <img src="assets/Mano Motors Hero.png" alt="Mano Motors Hero Vehicle"
-                class="hero-img-float relative z-[1] w-full h-full opacity-25 dark:opacity-70 object-cover object-center lg:object-left mix-blend-multiply dark:mix-blend-lighten filter dark:brightness-95 dark:contrast-110 pointer-events-none transition-all duration-700">
+                class="hero-img-float relative z-[1] w-full h-full opacity-25 dark:opacity-70 object-cover object-center lg:object-left mix-blend-multiply dark:mix-blend-lighten filter dark:brightness-95 dark:contrast-110 pointer-events-none transition-all duration-700" fetchpriority="high">
         </div>
 
         <!-- Main Content -->
@@ -394,12 +427,12 @@
                         <!-- Primary Image -->
                         <div class="w-7/12 mt-10">
                             <img src="assets/shop01.webp" alt="Auto Spare Parts Shop"
-                                class="rounded-3xl w-full h-[450px] object-cover shadow-2xl transform hover:-translate-y-2 transition-transform duration-500 border-4 border-white dark:border-[#222]">
+                                class="rounded-3xl w-full h-[450px] object-cover shadow-2xl transform hover:-translate-y-2 transition-transform duration-500 border-4 border-white dark:border-[#222]" loading="lazy">
                         </div>
                         <!-- Secondary Image -->
                         <div class="w-5/12 mb-10">
                             <img src="assets/shop02.webp" alt="Professional Mechanic"
-                                class="rounded-2xl w-full h-[350px] object-cover shadow-xl transform hover:scale-105 translate-y-6 transition-transform duration-500 border-4 border-brand-light/50 dark:border-[#333]">
+                                class="rounded-2xl w-full h-[350px] object-cover shadow-xl transform hover:scale-105 translate-y-6 transition-transform duration-500 border-4 border-brand-light/50 dark:border-[#333]" loading="lazy">
                         </div>
                     </div>
                     <!-- Decorative Backdrop -->
@@ -549,7 +582,7 @@
                         </div>
                         <img src="assets/why choose image 03.png" alt="Why Choose Mano Motors"
                             class="relative z-10 w-72 h-72 object-cover"
-                            style="filter:drop-shadow(0 0 50px rgba(0,103,181,0.5));">
+                            style="filter:drop-shadow(0 0 50px rgba(0,103,181,0.5));" loading="lazy">
                     </div>
 
                     <!-- LEFT BADGES (brand-blue) -->
@@ -676,7 +709,7 @@
                         <div class="absolute inset-0 bg-brand-blue/20 rounded-full blur-3xl"></div>
                         <img src="assets/why choose image 03.png" alt="Why Choose Mano Motors"
                             class="relative w-48 h-48 object-cover"
-                            style="filter:drop-shadow(0 0 28px rgba(0,103,181,0.5));">
+                            style="filter:drop-shadow(0 0 28px rgba(0,103,181,0.5));" loading="lazy">
                     </div>
                 </div>
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -1102,7 +1135,7 @@
                     <div data-aos="fade-up" data-aos-delay="0">
                         <div class="flex items-center gap-2 mb-6">
                             <div>
-                                <img src="assets/Mano Motors logo.png" alt="Mano Motors Logo" class="w-20 h-20">
+                                <img src="assets/Mano Motors logo.png" alt="Mano Motors Logo" class="w-20 h-20" loading="lazy">
                             </div>
                             <span class="text-2xl font-black text-brand-light tracking-tighter">Mano<span
                                     class="text-brand-blue">Motors</span></span>
